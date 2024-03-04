@@ -1,5 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
+	import ButtonWithShortcut from '$lib/components/ButtonWithShortcut.svelte';
 </script>
 
-<Button customShortcut="Ctrl+Shift+Enter" handleClick={() => alert('hi')}><h1>thing</h1></Button>
+<ButtonWithShortcut customShortcut="Ctrl+Shift+Enter" handleClick={() => alert('hi')}>
+	<h1>thing</h1>
+</ButtonWithShortcut>
