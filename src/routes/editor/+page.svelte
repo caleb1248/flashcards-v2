@@ -29,4 +29,6 @@
 	<a href="/editor/{deck}">{deck}</a>
 {/each}
 <button>Create new deck</button>
-<Modal>hi</Modal>
+<Modal>
+	<div class="w-1/2 h-1/2 flex justify-center items-center text-xl">YOOO</div>
+</Modal>

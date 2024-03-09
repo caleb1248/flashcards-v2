@@ -1,24 +1,22 @@
-<!--svelte-ignore a11y-->
+<!--svelte-ignore-->
 
 <script lang="ts">
-	import { Motion } from 'svelte-motion';
+	import { AnimatePresence, Motion, type Variants } from 'svelte-motion';
 
 	export let open = true;
+	export let setOpen: (open: boolean) => void;
 
 	const isDark = true;
+	const modalVariants: Variants = {
+		open: { opacity: 1, y: 0 },
+		closed: { opacity: 0, y: '-100%' }
+	};
 </script>
 
-<div
-	class="fixed inset-0{open ? ' block' : ' hidden'} backdrop-blur-sm{isDark
-		? ' bg-neutral-800'
-		: ''}"
-></div>
-<Motion let:motion initial={{ scale: 0.5 }} animate={{ scale: 1, type: 'spring' }}>
-	<div id="dialog" class={isDark ? ' bg-neutral-800' : ''}><slot /></div>
-</Motion>
-
-<style>
-	div#dialog {
-		@apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-	}
-</style>
+<AnimatePresence initial={false}>
+	{#if open}
+		<Motion let:motion exit={{ opacity: 0 }}>
+			<div class="modal-backdrop" on:click={() => setOpen(false)}></div>
+		</Motion>
+	{/if}
+</AnimatePresence>
