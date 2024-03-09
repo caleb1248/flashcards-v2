@@ -3,6 +3,9 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+	let modalOpen = writable(false);
+	modalOpen.subscribe((value) => console.log(value));
+
 	const decks = writable<string[]>([]);
 
 	onMount(() => {
@@ -28,7 +31,7 @@
 {#each $decks as deck}
 	<a href="/editor/{deck}">{deck}</a>
 {/each}
-<button>Create new deck</button>
-<Modal>
+<button on:click={() => modalOpen.set(true)}>Create new deck</button>
+<Modal open={modalOpen}>
 	<div class="w-1/2 h-1/2 flex justify-center items-center text-xl">YOOO</div>
 </Modal>
