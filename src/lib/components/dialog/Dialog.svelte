@@ -3,14 +3,18 @@
 <script lang="ts">
 	import { AnimatePresence, Motion, type Variants } from 'svelte-motion';
 	import type { Writable } from 'svelte/store';
+	import { setContext } from 'svelte';
+
 	export let open: Writable<boolean>;
-	open.subscribe((value) => console.log(value));
+	export let style: string = '';
 
 	const isDark = true;
 	const modalVariants: Variants = {
 		open: { opacity: 1, y: 0 },
 		closed: { opacity: 0, y: '-100%' }
 	};
+
+	setContext('dialog', { open });
 </script>
 
 <AnimatePresence show={$open}>
@@ -30,7 +34,7 @@
 				}}
 				exit="closed"
 			>
-				<div class="modal" on:click|stopPropagation use:motion>
+				<div class="modal" {style} on:click|stopPropagation use:motion>
 					<slot />
 				</div>
 			</Motion>
@@ -43,8 +47,6 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		width: 300px;
-		height: 300px;
 		border-radius: 20px;
 		padding: 1rem;
 		background-color: #222;

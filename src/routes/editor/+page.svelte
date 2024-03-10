@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Modal from '$lib/components/Modal.svelte';
+	import { Dialog, DialogTitle } from '$lib/components/Dialog';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
@@ -32,6 +32,6 @@
 	<a href="/editor/{deck}">{deck}</a>
 {/each}
 <button on:click={() => modalOpen.set(true)}>Create new deck</button>
-<Modal open={modalOpen}>
-	<div class="w-1/2 h-1/2 flex justify-center items-center text-xl">YOOO</div>
-</Modal>
+<Dialog open={modalOpen} style="w">
+	<DialogTitle closeButton={true}>Create new deck</DialogTitle>
+</Dialog>
